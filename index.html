@@ -37,184 +37,54 @@
         }
 
         /* ══════════════════════════════════════════
-           SPLASH SCREEN — animation d'accueil
+           SPLASH SCREEN
            ══════════════════════════════════════════ */
         .splash-overlay {
-            position: fixed;
-            inset: 0;
-            z-index: 9999;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
+            position: fixed; inset: 0; z-index: 9999;
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
             background: linear-gradient(135deg, var(--creme) 0%, var(--rose-pale) 40%, var(--lavande-light) 100%);
-            opacity: 1;
-            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
-            cursor: pointer;
+            opacity: 1; transition: opacity 0.8s ease-out, transform 0.8s ease-out; cursor: pointer;
         }
+        .splash-overlay.fade-out { opacity: 0; transform: scale(1.05); pointer-events: none; }
+        .splash-flower { font-size: 4rem; margin-bottom: 20px; animation: splashBloom 1.2s ease-out both; }
+        .splash-greeting { font-family: 'Dancing Script', cursive; font-size: clamp(1.6rem, 5vw, 2.4rem); color: var(--rose); margin-bottom: 8px; animation: splashFadeUp 1s ease-out 0.3s both; }
+        .splash-name { font-family: 'Playfair Display', Georgia, serif; font-size: clamp(2.2rem, 7vw, 3.8rem); font-weight: 700; color: var(--text-dark); margin-bottom: 12px; animation: splashFadeUp 1s ease-out 0.5s both; text-align: center; padding: 0 20px; }
+        .splash-date { font-family: 'Lora', serif; font-size: clamp(1rem, 3vw, 1.3rem); color: var(--text-soft); margin-bottom: 6px; animation: splashFadeUp 1s ease-out 0.7s both; }
+        .splash-saint { font-family: 'Lora', serif; font-size: clamp(0.9rem, 2.5vw, 1.1rem); color: var(--lavande); font-style: italic; margin-bottom: 32px; animation: splashFadeUp 1s ease-out 0.85s both; text-align: center; padding: 0 20px; }
+        .splash-cta { font-family: 'Dancing Script', cursive; font-size: 1.15rem; color: var(--text-light); animation: splashPulse 2s ease-in-out 1.5s infinite both; }
+        .splash-petals { position: absolute; inset: 0; pointer-events: none; overflow: hidden; }
+        .splash-petal-item { position: absolute; font-size: 1.5rem; opacity: 0; animation: splashPetalDrift 4s ease-in-out forwards; }
 
-        .splash-overlay.fade-out {
-            opacity: 0;
-            transform: scale(1.05);
-            pointer-events: none;
-        }
-
-        .splash-flower {
-            font-size: 4rem;
-            margin-bottom: 20px;
-            animation: splashBloom 1.2s ease-out both;
-        }
-
-        .splash-greeting {
-            font-family: 'Dancing Script', cursive;
-            font-size: clamp(1.6rem, 5vw, 2.4rem);
-            color: var(--rose);
-            margin-bottom: 8px;
-            animation: splashFadeUp 1s ease-out 0.3s both;
-        }
-
-        .splash-name {
-            font-family: 'Playfair Display', Georgia, serif;
-            font-size: clamp(2.2rem, 7vw, 3.8rem);
-            font-weight: 700;
-            color: var(--text-dark);
-            margin-bottom: 12px;
-            animation: splashFadeUp 1s ease-out 0.5s both;
-            text-align: center;
-            padding: 0 20px;
-        }
-
-        .splash-date {
-            font-family: 'Lora', serif;
-            font-size: clamp(1rem, 3vw, 1.3rem);
-            color: var(--text-soft);
-            margin-bottom: 6px;
-            animation: splashFadeUp 1s ease-out 0.7s both;
-        }
-
-        .splash-saint {
-            font-family: 'Lora', serif;
-            font-size: clamp(0.9rem, 2.5vw, 1.1rem);
-            color: var(--lavande);
-            font-style: italic;
-            margin-bottom: 32px;
-            animation: splashFadeUp 1s ease-out 0.85s both;
-            text-align: center;
-            padding: 0 20px;
-        }
-
-        .splash-cta {
-            font-family: 'Dancing Script', cursive;
-            font-size: 1.15rem;
-            color: var(--text-light);
-            animation: splashPulse 2s ease-in-out 1.5s infinite both;
-            letter-spacing: 0.5px;
-        }
-
-        .splash-petals {
-            position: absolute;
-            inset: 0;
-            pointer-events: none;
-            overflow: hidden;
-        }
-
-        .splash-petal-item {
-            position: absolute;
-            font-size: 1.5rem;
-            opacity: 0;
-            animation: splashPetalDrift 4s ease-in-out forwards;
-        }
-
-        @keyframes splashBloom {
-            0%   { opacity: 0; transform: scale(0.3) rotate(-30deg); }
-            60%  { transform: scale(1.15) rotate(5deg); }
-            100% { opacity: 1; transform: scale(1) rotate(0deg); }
-        }
-        @keyframes splashFadeUp {
-            from { opacity: 0; transform: translateY(18px); }
-            to   { opacity: 1; transform: translateY(0); }
-        }
-        @keyframes splashPulse {
-            0%, 100% { opacity: 0.5; }
-            50%      { opacity: 1; }
-        }
-        @keyframes splashPetalDrift {
-            0%   { opacity: 0; transform: translateY(-30px) rotate(0deg) scale(0.8); }
-            15%  { opacity: 0.6; }
-            85%  { opacity: 0.4; }
-            100% { opacity: 0; transform: translateY(calc(100vh + 30px)) rotate(270deg) scale(0.5); }
-        }
+        @keyframes splashBloom { 0% { opacity: 0; transform: scale(0.3) rotate(-30deg); } 60% { transform: scale(1.15) rotate(5deg); } 100% { opacity: 1; transform: scale(1) rotate(0deg); } }
+        @keyframes splashFadeUp { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes splashPulse { 0%, 100% { opacity: 0.5; } 50% { opacity: 1; } }
+        @keyframes splashPetalDrift { 0% { opacity: 0; transform: translateY(-30px) rotate(0deg) scale(0.8); } 15% { opacity: 0.6; } 85% { opacity: 0.4; } 100% { opacity: 0; transform: translateY(calc(100vh + 30px)) rotate(270deg) scale(0.5); } }
 
         /* ══════════════════════════════════════════
            BACKGROUND BLOBS
            ══════════════════════════════════════════ */
-        .bg-layer {
-            position: fixed;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            pointer-events: none;
-            z-index: 0;
-            overflow: hidden;
-        }
-
-        .blob {
-            position: absolute;
-            border-radius: 50%;
-            filter: blur(80px);
-            opacity: 0.35;
-            animation: floatBlob 20s ease-in-out infinite alternate;
-        }
-
-        .blob-1 {
-            width: 500px; height: 500px;
-            background: radial-gradient(circle, var(--rose-light), transparent 70%);
-            top: -10%; left: -5%;
-        }
-        .blob-2 {
-            width: 400px; height: 400px;
-            background: radial-gradient(circle, var(--lavande-light), transparent 70%);
-            top: 30%; right: -8%;
-            animation-delay: -5s;
-        }
-        .blob-3 {
-            width: 450px; height: 450px;
-            background: radial-gradient(circle, var(--sauge-light), transparent 70%);
-            bottom: -5%; left: 20%;
-            animation-delay: -10s;
-        }
-        .blob-4 {
-            width: 300px; height: 300px;
-            background: radial-gradient(circle, var(--gold-light), transparent 70%);
-            top: 60%; left: -10%;
-            animation-delay: -15s;
-        }
-
-        @keyframes floatBlob {
-            0%   { transform: translate(0, 0) scale(1); }
-            33%  { transform: translate(30px, -20px) scale(1.05); }
-            66%  { transform: translate(-20px, 30px) scale(0.95); }
-            100% { transform: translate(15px, 15px) scale(1.02); }
-        }
+        .bg-layer { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; overflow: hidden; }
+        .blob { position: absolute; border-radius: 50%; filter: blur(80px); opacity: 0.35; animation: floatBlob 20s ease-in-out infinite alternate; }
+        .blob-1 { width: 500px; height: 500px; background: radial-gradient(circle, var(--rose-light), transparent 70%); top: -10%; left: -5%; }
+        .blob-2 { width: 400px; height: 400px; background: radial-gradient(circle, var(--lavande-light), transparent 70%); top: 30%; right: -8%; animation-delay: -5s; }
+        .blob-3 { width: 450px; height: 450px; background: radial-gradient(circle, var(--sauge-light), transparent 70%); bottom: -5%; left: 20%; animation-delay: -10s; }
+        .blob-4 { width: 300px; height: 300px; background: radial-gradient(circle, var(--gold-light), transparent 70%); top: 60%; left: -10%; animation-delay: -15s; }
+        @keyframes floatBlob { 0% { transform: translate(0, 0) scale(1); } 33% { transform: translate(30px, -20px) scale(1.05); } 66% { transform: translate(-20px, 30px) scale(0.95); } 100% { transform: translate(15px, 15px) scale(1.02); } }
 
         /* ══════════════════════════════════════════
-           FLORAL SVG CORNERS
+           FLORAL SVG
            ══════════════════════════════════════════ */
-        .floral-top-right, .floral-bottom-left {
-            position: fixed;
-            z-index: 1;
-            pointer-events: none;
-            opacity: 0.18;
-        }
+        .floral-top-right, .floral-bottom-left { position: fixed; z-index: 1; pointer-events: none; opacity: 0.18; }
         .floral-top-right { top: -30px; right: -30px; width: 350px; height: 350px; }
         .floral-bottom-left { bottom: -40px; left: -40px; width: 400px; height: 400px; transform: rotate(180deg); }
 
         /* ══════════════════════════════════════════
-           MAIN CONTAINER
+           LAYOUT — two-column on desktop
            ══════════════════════════════════════════ */
-        .container {
+        .page-wrapper {
             position: relative;
             z-index: 2;
-            max-width: 800px;
+            max-width: 1100px;
             margin: 0 auto;
             padding: 40px 24px 60px;
             min-height: 100vh;
@@ -223,229 +93,221 @@
             align-items: center;
         }
 
-        .header {
-            text-align: center;
-            margin-bottom: 10px;
-            animation: fadeSlideDown 1s ease-out both;
-        }
-
-        .header .subtitle {
-            font-family: 'Dancing Script', cursive;
-            font-size: 1.3rem;
-            color: var(--rose);
-            margin-bottom: 6px;
-            letter-spacing: 0.5px;
-        }
-
-        .header h1 {
-            font-family: 'Playfair Display', Georgia, serif;
-            font-size: clamp(2rem, 6vw, 3.2rem);
-            font-weight: 700;
-            color: var(--text-dark);
-            line-height: 1.2;
-            margin-bottom: 8px;
-        }
-
-        .header h1 span { color: var(--rose); font-style: italic; }
-
-        .header .tagline {
-            font-size: 1rem;
-            color: var(--text-soft);
-            font-style: italic;
-            max-width: 500px;
-            margin: 0 auto;
-            line-height: 1.6;
-        }
-
-        .divider {
+        .main-row {
             display: flex;
-            align-items: center;
+            gap: 28px;
+            width: 100%;
+            align-items: flex-start;
             justify-content: center;
-            gap: 12px;
-            margin: 28px 0;
-            animation: fadeIn 1.2s ease-out 0.3s both;
         }
 
-        .divider-line {
-            width: 60px;
-            height: 1px;
-            background: linear-gradient(to right, transparent, var(--rose), transparent);
+        .center-column {
+            flex: 1;
+            max-width: 540px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
 
+        .side-column {
+            width: 280px;
+            flex-shrink: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            animation: fadeSlideUp 1s ease-out 0.8s both;
+        }
+
+        /* ── Header ── */
+        .header { text-align: center; margin-bottom: 10px; animation: fadeSlideDown 1s ease-out both; width: 100%; }
+        .header .subtitle { font-family: 'Dancing Script', cursive; font-size: 1.3rem; color: var(--rose); margin-bottom: 6px; }
+        .header h1 { font-family: 'Playfair Display', Georgia, serif; font-size: clamp(2rem, 6vw, 3.2rem); font-weight: 700; color: var(--text-dark); line-height: 1.2; margin-bottom: 8px; }
+        .header h1 span { color: var(--rose); font-style: italic; }
+        .header .tagline { font-size: 1rem; color: var(--text-soft); font-style: italic; max-width: 500px; margin: 0 auto; line-height: 1.6; }
+
+        .divider { display: flex; align-items: center; justify-content: center; gap: 12px; margin: 24px 0; animation: fadeIn 1.2s ease-out 0.3s both; width: 100%; }
+        .divider-line { width: 60px; height: 1px; background: linear-gradient(to right, transparent, var(--rose), transparent); }
         .divider-flower { font-size: 1.2rem; opacity: 0.7; }
 
-        /* ── Date, Clock & Éphéméride ── */
-        .banner {
-            text-align: center;
-            margin-bottom: 8px;
-            animation: fadeSlideUp 1s ease-out 0.4s both;
-        }
-
-        .date-display {
-            font-family: 'Playfair Display', Georgia, serif;
-            font-size: clamp(1.1rem, 3.5vw, 1.5rem);
-            color: var(--text-dark);
-            font-weight: 600;
-            margin-bottom: 4px;
-        }
-
-        .clock-display {
-            font-family: 'Lora', serif;
-            font-size: clamp(1rem, 3vw, 1.25rem);
-            color: var(--text-soft);
-            font-weight: 400;
-            letter-spacing: 1px;
-            margin-bottom: 6px;
-        }
-
-        .ephemeride-display {
-            font-family: 'Dancing Script', cursive;
-            font-size: clamp(1rem, 2.8vw, 1.2rem);
-            color: var(--lavande);
-        }
-
+        /* ── Banner ── */
+        .banner { text-align: center; margin-bottom: 8px; animation: fadeSlideUp 1s ease-out 0.4s both; }
+        .date-display { font-family: 'Playfair Display', Georgia, serif; font-size: clamp(1.1rem, 3.5vw, 1.5rem); color: var(--text-dark); font-weight: 600; margin-bottom: 4px; }
+        .clock-display { font-family: 'Lora', serif; font-size: clamp(1rem, 3vw, 1.25rem); color: var(--text-soft); letter-spacing: 1px; margin-bottom: 6px; }
+        .ephemeride-display { font-family: 'Dancing Script', cursive; font-size: clamp(1rem, 2.8vw, 1.2rem); color: var(--lavande); }
         .ephemeride-display::before { content: '✿ '; opacity: 0.6; }
         .ephemeride-display::after  { content: ' ✿'; opacity: 0.6; }
 
         /* ── Countdown card ── */
         .countdown-card {
-            background: rgba(255, 255, 255, 0.65);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border: 1px solid rgba(232, 160, 191, 0.2);
-            border-radius: 24px;
-            padding: 44px 36px;
-            text-align: center;
-            width: 100%;
-            max-width: 520px;
+            background: rgba(255, 255, 255, 0.65); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(232, 160, 191, 0.2); border-radius: 24px; padding: 44px 36px;
+            text-align: center; width: 100%; max-width: 520px;
             box-shadow: 0 8px 32px rgba(195, 174, 214, 0.1), 0 1px 4px rgba(0,0,0,0.03);
-            animation: fadeScaleIn 1s ease-out 0.6s both;
-            margin-bottom: 12px;
+            animation: fadeScaleIn 1s ease-out 0.6s both; margin-bottom: 12px;
         }
-
-        .countdown-label {
-            font-family: 'Dancing Script', cursive;
-            font-size: 1.25rem;
-            color: var(--rose);
-            margin-bottom: 16px;
-        }
-
-        .countdown-number {
-            font-family: 'Playfair Display', Georgia, serif;
-            font-size: clamp(4.5rem, 15vw, 8rem);
-            font-weight: 700;
-            color: var(--text-dark);
-            line-height: 1;
-            margin-bottom: 8px;
-            position: relative;
-            display: inline-block;
-        }
-
-        .countdown-number::after {
-            content: '';
-            position: absolute;
-            bottom: -4px; left: 10%;
-            width: 80%; height: 6px;
-            background: linear-gradient(90deg, var(--rose-light), var(--lavande-light), var(--sauge-light));
-            border-radius: 3px;
-            opacity: 0.6;
-        }
-
-        .countdown-unit {
-            font-family: 'Lora', serif;
-            font-size: 1.15rem;
-            color: var(--text-soft);
-            margin-top: 12px;
-            letter-spacing: 0.5px;
-        }
-
-        .countdown-details {
-            margin-top: 20px;
-            font-size: 0.9rem;
-            color: var(--text-light);
-            line-height: 1.6;
-        }
+        .countdown-label { font-family: 'Dancing Script', cursive; font-size: 1.25rem; color: var(--rose); margin-bottom: 16px; }
+        .countdown-number { font-family: 'Playfair Display', Georgia, serif; font-size: clamp(4.5rem, 15vw, 8rem); font-weight: 700; color: var(--text-dark); line-height: 1; margin-bottom: 8px; position: relative; display: inline-block; }
+        .countdown-number::after { content: ''; position: absolute; bottom: -4px; left: 10%; width: 80%; height: 6px; background: linear-gradient(90deg, var(--rose-light), var(--lavande-light), var(--sauge-light)); border-radius: 3px; opacity: 0.6; }
+        .countdown-unit { font-family: 'Lora', serif; font-size: 1.15rem; color: var(--text-soft); margin-top: 12px; }
+        .countdown-details { margin-top: 20px; font-size: 0.9rem; color: var(--text-light); line-height: 1.6; }
 
         /* ── Quote ── */
-        .daily-quote {
-            text-align: center;
-            max-width: 520px;
-            width: 100%;
-            padding: 24px;
-            animation: fadeSlideUp 1s ease-out 0.9s both;
-        }
-
-        .daily-quote blockquote {
-            font-family: 'Playfair Display', Georgia, serif;
-            font-size: 1.1rem;
-            font-style: italic;
-            color: var(--text-soft);
-            line-height: 1.7;
-            position: relative;
-            padding: 0 16px;
-        }
-
-        .daily-quote blockquote::before {
-            content: '\201C';
-            font-family: 'Playfair Display', serif;
-            font-size: 3.5rem;
-            color: var(--rose-light);
-            position: absolute;
-            top: -20px; left: -8px;
-            line-height: 1;
-        }
-
-        .quote-author {
-            margin-top: 12px;
-            color: var(--text-light);
-            font-family: 'Dancing Script', cursive;
-            font-size: 1.05rem;
-        }
+        .daily-quote { text-align: center; max-width: 520px; width: 100%; padding: 24px; animation: fadeSlideUp 1s ease-out 0.9s both; }
+        .daily-quote blockquote { font-family: 'Playfair Display', Georgia, serif; font-size: 1.1rem; font-style: italic; color: var(--text-soft); line-height: 1.7; position: relative; padding: 0 16px; }
+        .daily-quote blockquote::before { content: '\201C'; font-family: 'Playfair Display', serif; font-size: 3.5rem; color: var(--rose-light); position: absolute; top: -20px; left: -8px; line-height: 1; }
+        .quote-author { margin-top: 12px; color: var(--text-light); font-family: 'Dancing Script', cursive; font-size: 1.05rem; }
 
         /* ── Footer ── */
-        .footer {
-            margin-top: auto;
-            padding-top: 40px;
-            text-align: center;
-            animation: fadeIn 1s ease-out 1.2s both;
-        }
-
+        .footer { padding-top: 32px; text-align: center; animation: fadeIn 1s ease-out 1.2s both; width: 100%; }
         .footer p { font-size: 0.85rem; color: var(--text-light); font-style: italic; }
         .footer .heart { color: var(--rose); display: inline-block; animation: heartbeat 2s ease-in-out infinite; }
 
-        /* ── Celebration ── */
-        .celebration .countdown-card {
-            background: linear-gradient(135deg, rgba(255,252,249,0.85), rgba(245,213,224,0.5));
-            border-color: var(--rose);
+        /* ══════════════════════════════════════════
+           CALENDRIER D'AVRIL
+           ══════════════════════════════════════════ */
+        .calendar-card {
+            background: rgba(255, 255, 255, 0.65); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(232, 160, 191, 0.2); border-radius: 20px; padding: 18px 14px;
+            box-shadow: 0 6px 24px rgba(195, 174, 214, 0.08);
         }
 
-        .celebration .celebration-title {
+        .calendar-title {
             font-family: 'Playfair Display', Georgia, serif;
-            font-size: clamp(1.8rem, 5vw, 2.8rem);
-            font-weight: 700;
-            color: var(--text-dark);
-            margin-bottom: 12px;
+            font-size: 1.1rem; font-weight: 600; color: var(--text-dark);
+            text-align: center; margin-bottom: 12px;
+        }
+
+        .calendar-grid {
+            display: grid;
+            grid-template-columns: 28px repeat(7, 1fr);
+            gap: 2px;
+            font-family: 'Lora', serif;
+            font-size: 0.78rem;
+        }
+
+        .cal-header {
+            font-weight: 600; color: var(--text-soft);
+            text-align: center; padding: 4px 0;
+            font-size: 0.7rem; text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .cal-header.week-col {
+            color: var(--text-light);
+            font-size: 0.6rem;
+        }
+
+        .cal-week-num {
+            font-size: 0.6rem;
+            color: var(--text-light);
+            display: flex; align-items: center; justify-content: center;
+            font-style: italic;
+        }
+
+        .cal-day {
+            text-align: center; padding: 5px 2px;
+            border-radius: 8px; cursor: default;
+            transition: background 0.2s, color 0.2s;
             line-height: 1.3;
         }
 
+        .cal-day.empty { visibility: hidden; }
+
+        .cal-day.weekend { color: var(--text-light); }
+
+        .cal-day.ferie {
+            color: var(--rose);
+            font-style: italic;
+            position: relative;
+        }
+
+        .cal-day.passed {
+            color: var(--text-light);
+            text-decoration: line-through;
+            opacity: 0.5;
+        }
+
+        .cal-day.today {
+            background: linear-gradient(135deg, var(--rose), var(--lavande));
+            color: white;
+            font-weight: 700;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(232, 160, 191, 0.35);
+            text-decoration: none;
+            opacity: 1;
+        }
+
+        .cal-day.target-day {
+            background: linear-gradient(135deg, var(--gold), var(--gold-light));
+            color: white;
+            font-weight: 700;
+            border-radius: 10px;
+            position: relative;
+        }
+
+        /* ══════════════════════════════════════════
+           MÉTÉO
+           ══════════════════════════════════════════ */
+        .weather-card {
+            background: rgba(255, 255, 255, 0.65); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(168, 197, 160, 0.25); border-radius: 20px; padding: 18px;
+            box-shadow: 0 6px 24px rgba(168, 197, 160, 0.08);
+            text-align: center;
+        }
+
+        .weather-title {
+            font-family: 'Dancing Script', cursive;
+            font-size: 1rem; color: var(--sauge); margin-bottom: 10px;
+        }
+
+        .weather-content {
+            display: flex; align-items: center; justify-content: center; gap: 12px;
+        }
+
+        .weather-icon { font-size: 2.5rem; }
+
+        .weather-info { text-align: left; }
+
+        .weather-temp {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: 1.8rem; font-weight: 700; color: var(--text-dark);
+            line-height: 1;
+        }
+
+        .weather-desc {
+            font-family: 'Lora', serif; font-size: 0.85rem;
+            color: var(--text-soft); text-transform: capitalize;
+            margin-top: 2px;
+        }
+
+        .weather-details {
+            display: flex; gap: 16px; justify-content: center;
+            margin-top: 10px; font-size: 0.75rem; color: var(--text-light);
+        }
+
+        .weather-detail-item { display: flex; align-items: center; gap: 4px; }
+
+        .weather-loading {
+            font-family: 'Lora', serif; font-size: 0.85rem;
+            color: var(--text-light); font-style: italic;
+            padding: 16px 0;
+        }
+
+        .weather-error {
+            font-family: 'Lora', serif; font-size: 0.8rem;
+            color: var(--text-light); font-style: italic;
+            padding: 8px 0; line-height: 1.5;
+        }
+
+        /* ══════════════════════════════════════════
+           CELEBRATION
+           ══════════════════════════════════════════ */
+        .celebration .countdown-card { background: linear-gradient(135deg, rgba(255,252,249,0.85), rgba(245,213,224,0.5)); border-color: var(--rose); }
+        .celebration .celebration-title { font-family: 'Playfair Display', Georgia, serif; font-size: clamp(1.8rem, 5vw, 2.8rem); font-weight: 700; color: var(--text-dark); margin-bottom: 12px; line-height: 1.3; }
         .celebration .celebration-emoji { font-size: 3rem; margin-bottom: 16px; display: block; }
+        .celebration .celebration-message { font-family: 'Lora', serif; font-size: 1.1rem; color: var(--text-soft); line-height: 1.8; max-width: 460px; margin: 0 auto; }
 
-        .celebration .celebration-message {
-            font-family: 'Lora', serif;
-            font-size: 1.1rem;
-            color: var(--text-soft);
-            line-height: 1.8;
-            max-width: 460px;
-            margin: 0 auto;
-        }
-
-        #confetti-canvas {
-            position: fixed;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            pointer-events: none;
-            z-index: 100;
-        }
+        #confetti-canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 100; }
 
         /* ── Animations ── */
         @keyframes fadeSlideDown { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
@@ -455,25 +317,34 @@
         @keyframes heartbeat { 0%, 100% { transform: scale(1); } 15% { transform: scale(1.25); } 30% { transform: scale(1); } 45% { transform: scale(1.15); } 60% { transform: scale(1); } }
         @keyframes numberPulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.03); } }
 
-        .petal {
-            position: fixed;
-            pointer-events: none;
-            z-index: 1;
-            opacity: 0;
-            animation: petalFall linear forwards;
+        .petal { position: fixed; pointer-events: none; z-index: 1; opacity: 0; animation: petalFall linear forwards; }
+        @keyframes petalFall { 0% { opacity: 0; transform: translateY(-20px) rotate(0deg); } 10% { opacity: 0.7; } 90% { opacity: 0.5; } 100% { opacity: 0; transform: translateY(100vh) rotate(360deg); } }
+
+        /* ══════════════════════════════════════════
+           RESPONSIVE
+           ══════════════════════════════════════════ */
+        @media (max-width: 800px) {
+            .main-row {
+                flex-direction: column;
+                align-items: center;
+            }
+            .side-column {
+                width: 100%;
+                max-width: 520px;
+                flex-direction: row;
+                flex-wrap: wrap;
+            }
+            .calendar-card, .weather-card {
+                flex: 1;
+                min-width: 240px;
+            }
         }
 
-        @keyframes petalFall {
-            0%   { opacity: 0; transform: translateY(-20px) rotate(0deg); }
-            10%  { opacity: 0.7; }
-            90%  { opacity: 0.5; }
-            100% { opacity: 0; transform: translateY(100vh) rotate(360deg); }
-        }
-
-        /* ── Responsive ── */
-        @media (max-width: 600px) {
-            .container { padding: 28px 18px 40px; }
-            .countdown-card { padding: 32px 24px; border-radius: 20px; }
+        @media (max-width: 520px) {
+            .page-wrapper { padding: 28px 14px 40px; }
+            .countdown-card { padding: 32px 20px; border-radius: 20px; }
+            .side-column { flex-direction: column; }
+            .calendar-card, .weather-card { min-width: unset; }
             .floral-top-right { width: 200px; height: 200px; top: -15px; right: -15px; }
             .floral-bottom-left { width: 250px; height: 250px; bottom: -20px; left: -20px; }
             .blob { filter: blur(60px); opacity: 0.25; }
@@ -523,7 +394,6 @@
             <path d="M370 175 C360 210, 340 230, 310 260" stroke="#a8c5a0" stroke-width="1.5" fill="none" opacity="0.5"/>
         </g>
     </svg>
-
     <svg class="floral-bottom-left" viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg">
         <g opacity="0.8">
             <ellipse cx="320" cy="80" rx="60" ry="30" fill="#c3aed6" transform="rotate(-30 320 80)"/>
@@ -540,8 +410,8 @@
 
     <canvas id="confetti-canvas"></canvas>
 
-    <!-- ══════ MAIN CONTENT ══════ -->
-    <div class="container" id="main-container">
+    <!-- ══════ PAGE ══════ -->
+    <div class="page-wrapper" id="main-container">
 
         <header class="header">
             <p class="subtitle">Le Compte à Rebours de</p>
@@ -561,16 +431,39 @@
             <div class="ephemeride-display" id="ephemeride-display"></div>
         </div>
 
-        <div class="countdown-card" id="countdown-card">
-            <p class="countdown-label">Jours ouvrés avant la liberté</p>
-            <div class="countdown-number" id="countdown-number">–</div>
-            <p class="countdown-unit" id="countdown-unit">jours ouvrés restants</p>
-            <p class="countdown-details" id="countdown-details"></p>
-        </div>
+        <!-- ── Layout deux colonnes ── -->
+        <div class="main-row">
 
-        <div class="daily-quote" id="daily-quote">
-            <blockquote id="quote-text"></blockquote>
-            <p class="quote-author" id="quote-author"></p>
+            <!-- Colonne centrale -->
+            <div class="center-column">
+                <div class="countdown-card" id="countdown-card">
+                    <p class="countdown-label">Jours ouvrés avant la liberté</p>
+                    <div class="countdown-number" id="countdown-number">–</div>
+                    <p class="countdown-unit" id="countdown-unit">jours ouvrés restants</p>
+                    <p class="countdown-details" id="countdown-details"></p>
+                </div>
+
+                <div class="daily-quote" id="daily-quote">
+                    <blockquote id="quote-text"></blockquote>
+                    <p class="quote-author" id="quote-author"></p>
+                </div>
+            </div>
+
+            <!-- Colonne latérale -->
+            <div class="side-column">
+                <!-- Calendrier -->
+                <div class="calendar-card">
+                    <div class="calendar-title">Avril 2026</div>
+                    <div class="calendar-grid" id="calendar-grid"></div>
+                </div>
+
+                <!-- Météo -->
+                <div class="weather-card" id="weather-card">
+                    <div class="weather-title">Météo du jour</div>
+                    <div class="weather-loading" id="weather-content">Chargement de la météo…</div>
+                </div>
+            </div>
+
         </div>
 
         <footer class="footer">
@@ -590,48 +483,36 @@
             '2026-05-01', // Fête du travail
         ];
 
+        const WEATHER_API_KEY = '71996a259a4123b4040604abcd4686f5';  // ← Clé OpenWeatherMap gratuite
+        const WEATHER_CITY    = 'Mons-en-Baroeul';           // ← Ville du bureau
+        const WEATHER_COUNTRY = 'FR';
+
         // ════════════════════════════════════════
-        //  SAINTS DU JOUR (avril + début mai)
+        //  SAINTS DU JOUR
         // ════════════════════════════════════════
 
         const SAINTS = {
-            '04-01': 'Sainte Valéry',
-            '04-02': 'Sainte Sandrine',
-            '04-03': 'Saint Richard',
-            '04-04': 'Saint Isidore',
-            '04-05': 'Sainte Irène',
-            '04-06': 'Saint Marcellin',
-            '04-07': 'Saint Jean-Baptiste de la Salle',
-            '04-08': 'Sainte Julie',
-            '04-09': 'Saint Gautier',
-            '04-10': 'Saint Fulbert',
-            '04-11': 'Saint Stanislas',
-            '04-12': 'Saint Jules',
-            '04-13': 'Sainte Ida',
-            '04-14': 'Saint Maxime',
-            '04-15': 'Saint Paterne',
-            '04-16': 'Saint Benoît-Joseph',
-            '04-17': 'Saint Anicet',
-            '04-18': 'Saint Parfait',
-            '04-19': 'Sainte Emma',
-            '04-20': 'Sainte Odette',
-            '04-21': 'Saint Anselme',
-            '04-22': 'Saint Alexandre',
-            '04-23': 'Saint Georges',
-            '04-24': 'Saint Fidèle',
-            '04-25': 'Saint Marc',
-            '04-26': 'Sainte Alida',
-            '04-27': 'Sainte Zita',
-            '04-28': 'Sainte Valérie',
-            '04-29': 'Sainte Catherine de Sienne',
-            '04-30': 'Saint Robert',
-            '05-01': 'Saint Jérémie',
-            '05-02': 'Saint Boris',
-            '05-03': 'Saints Philippe et Jacques',
+            '04-01': 'Sainte Valéry',    '04-02': 'Sainte Sandrine',
+            '04-03': 'Saint Richard',     '04-04': 'Saint Isidore',
+            '04-05': 'Sainte Irène',      '04-06': 'Saint Marcellin',
+            '04-07': 'Saint J.-B. de la Salle', '04-08': 'Sainte Julie',
+            '04-09': 'Saint Gautier',     '04-10': 'Saint Fulbert',
+            '04-11': 'Saint Stanislas',   '04-12': 'Saint Jules',
+            '04-13': 'Sainte Ida',        '04-14': 'Saint Maxime',
+            '04-15': 'Saint Paterne',     '04-16': 'Saint Benoît-Joseph',
+            '04-17': 'Saint Anicet',      '04-18': 'Saint Parfait',
+            '04-19': 'Sainte Emma',       '04-20': 'Sainte Odette',
+            '04-21': 'Saint Anselme',     '04-22': 'Saint Alexandre',
+            '04-23': 'Saint Georges',     '04-24': 'Saint Fidèle',
+            '04-25': 'Saint Marc',        '04-26': 'Sainte Alida',
+            '04-27': 'Sainte Zita',       '04-28': 'Sainte Valérie',
+            '04-29': 'Ste Catherine de Sienne', '04-30': 'Saint Robert',
+            '05-01': 'Saint Jérémie',     '05-02': 'Saint Boris',
+            '05-03': 'Sts Philippe et Jacques',
         };
 
         function getSaintDuJour(date) {
-            const key = String(date.getMonth() + 1).padStart(2, '0') + '-' + String(date.getDate()).padStart(2, '0');
+            const key = String(date.getMonth()+1).padStart(2,'0') + '-' + String(date.getDate()).padStart(2,'0');
             return SAINTS[key] || null;
         }
 
@@ -666,8 +547,152 @@
         ];
 
         // ════════════════════════════════════════
+        //  CALENDRIER D'AVRIL 2026
+        // ════════════════════════════════════════
+
+        function buildCalendar() {
+            const grid = document.getElementById('calendar-grid');
+            const today = new Date();
+            const todayDate = today.getDate();
+            const todayMonth = today.getMonth(); // 3 = avril
+            const todayYear = today.getFullYear();
+
+            // En-têtes : Sem + Lu Ma Me Je Ve Sa Di
+            const headers = ['S.', 'Lu', 'Ma', 'Me', 'Je', 'Ve', 'Sa', 'Di'];
+            headers.forEach((h, i) => {
+                const el = document.createElement('div');
+                el.className = i === 0 ? 'cal-header week-col' : 'cal-header';
+                el.textContent = h;
+                grid.appendChild(el);
+            });
+
+            // Avril 2026 : commence un mercredi (jour 3 en JS, mais lundi=1 en ISO)
+            const year = 2026, month = 3; // 0-indexé : 3 = avril
+            const firstDay = new Date(year, month, 1);
+            const daysInMonth = new Date(year, month + 1, 0).getDate(); // 30
+
+            // Jour de la semaine (lundi=0) du 1er avril
+            let startDow = firstDay.getDay() - 1; // JS: 0=dim → lundi=0
+            if (startDow < 0) startDow = 6; // dimanche → 6
+
+            // Numéro de semaine ISO
+            function getWeekNumber(d) {
+                const tmp = new Date(Date.UTC(d.getFullYear(), d.getMonth(), d.getDate()));
+                tmp.setUTCDate(tmp.getUTCDate() + 4 - (tmp.getUTCDay() || 7));
+                const yearStart = new Date(Date.UTC(tmp.getUTCFullYear(), 0, 1));
+                return Math.ceil(((tmp - yearStart) / 86400000 + 1) / 7);
+            }
+
+            let currentDay = 1;
+            let currentDow = 0; // 0=lundi
+
+            // Semaines
+            while (currentDay <= daysInMonth) {
+                // Numéro de semaine
+                const weekDate = new Date(year, month, currentDay);
+                const weekNum = document.createElement('div');
+                weekNum.className = 'cal-week-num';
+                weekNum.textContent = getWeekNumber(weekDate);
+                grid.appendChild(weekNum);
+
+                for (let dow = 0; dow < 7; dow++) {
+                    const cell = document.createElement('div');
+                    cell.className = 'cal-day';
+
+                    if ((currentDay === 1 && dow < startDow) || currentDay > daysInMonth) {
+                        cell.classList.add('empty');
+                        cell.textContent = '';
+                    } else {
+                        cell.textContent = currentDay;
+
+                        const dateKey = `2026-04-${String(currentDay).padStart(2, '0')}`;
+                        const isWeekend = (dow === 5 || dow === 6); // samedi, dimanche
+                        const isFerie = JOURS_FERIES.includes(dateKey);
+                        const isToday = (todayYear === year && todayMonth === month && todayDate === currentDay);
+                        const isPassed = (todayYear === year && todayMonth === month && todayDate > currentDay) ||
+                                         (todayYear === year && todayMonth > month) ||
+                                         (todayYear > year);
+
+                        if (isWeekend) cell.classList.add('weekend');
+                        if (isFerie) cell.classList.add('ferie');
+                        if (isPassed && !isToday) cell.classList.add('passed');
+                        if (isToday) cell.classList.add('today');
+
+                        currentDay++;
+                    }
+
+                    grid.appendChild(cell);
+                }
+            }
+        }
+
+        // ════════════════════════════════════════
+        //  MÉTÉO (OpenWeatherMap)
+        // ════════════════════════════════════════
+
+        const WEATHER_EMOJIS = {
+            '01d': '☀️', '01n': '🌙',
+            '02d': '⛅', '02n': '☁️',
+            '03d': '☁️', '03n': '☁️',
+            '04d': '☁️', '04n': '☁️',
+            '09d': '🌧️', '09n': '🌧️',
+            '10d': '🌦️', '10n': '🌧️',
+            '11d': '⛈️', '11n': '⛈️',
+            '13d': '🌨️', '13n': '🌨️',
+            '50d': '🌫️', '50n': '🌫️',
+        };
+
+        async function loadWeather() {
+            const container = document.getElementById('weather-content');
+
+            if (WEATHER_API_KEY === 'VOTRE_CLE_API') {
+                container.innerHTML = `
+                    <div class="weather-error">
+                        🔑 Pour activer la météo :<br>
+                        1. Créer une clé gratuite sur <strong>openweathermap.org</strong><br>
+                        2. Remplacer <code>VOTRE_CLE_API</code> dans le code
+                    </div>`;
+                return;
+            }
+
+            try {
+                const url = `https://api.openweathermap.org/data/2.5/weather?q=${WEATHER_CITY},${WEATHER_COUNTRY}&units=metric&lang=fr&appid=${WEATHER_API_KEY}`;
+                const res = await fetch(url);
+                if (!res.ok) throw new Error('API error');
+                const data = await res.json();
+
+                const icon = data.weather[0].icon;
+                const emoji = WEATHER_EMOJIS[icon] || '🌡️';
+                const temp = Math.round(data.main.temp);
+                const feelsLike = Math.round(data.main.feels_like);
+                const desc = data.weather[0].description;
+                const humidity = data.main.humidity;
+                const wind = Math.round(data.wind.speed * 3.6); // m/s → km/h
+
+                container.innerHTML = `
+                    <div class="weather-content">
+                        <span class="weather-icon">${emoji}</span>
+                        <div class="weather-info">
+                            <div class="weather-temp">${temp}°C</div>
+                            <div class="weather-desc">${desc}</div>
+                        </div>
+                    </div>
+                    <div class="weather-details">
+                        <span class="weather-detail-item">🌡️ Ressenti ${feelsLike}°</span>
+                        <span class="weather-detail-item">💧 ${humidity}%</span>
+                        <span class="weather-detail-item">💨 ${wind} km/h</span>
+                    </div>`;
+            } catch (e) {
+                container.innerHTML = `<div class="weather-error">Météo momentanément indisponible</div>`;
+            }
+        }
+
+        // ════════════════════════════════════════
         //  SPLASH SCREEN (1× par jour)
         // ════════════════════════════════════════
+
+        const JOURS_SEMAINE = ['Dimanche','Lundi','Mardi','Mercredi','Jeudi','Vendredi','Samedi'];
+        const MOIS_ANNEE = ['janvier','février','mars','avril','mai','juin','juillet','août','septembre','octobre','novembre','décembre'];
 
         function getTodayKey() {
             const d = new Date();
@@ -675,11 +700,8 @@
         }
 
         function shouldShowSplash() {
-            try {
-                return localStorage.getItem('bea-last-splash') !== getTodayKey();
-            } catch (e) {
-                return true;
-            }
+            try { return localStorage.getItem('bea-last-splash') !== getTodayKey(); }
+            catch (e) { return true; }
         }
 
         function markSplashShown() {
@@ -688,36 +710,31 @@
 
         function initSplash() {
             if (!shouldShowSplash()) return;
-
             const overlay = document.getElementById('splash-overlay');
             overlay.style.display = 'flex';
-
             const now = new Date();
 
-            // Date
             document.getElementById('splash-date').textContent =
                 `${JOURS_SEMAINE[now.getDay()]} ${now.getDate()} ${MOIS_ANNEE[now.getMonth()]} ${now.getFullYear()}`;
 
-            // Saint du jour
             const saint = getSaintDuJour(now);
             if (saint) {
-                document.getElementById('splash-saint').textContent = `Nous fêtons les ${saint.replace(/^Sainte?\s/, '')} — ${saint}`;
+                document.getElementById('splash-saint').textContent =
+                    `Nous fêtons les ${saint.replace(/^Sainte?\s/, '')} — ${saint}`;
             }
 
-            // Message contextuel
             const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
             const target = new Date(RETIREMENT_DATE); target.setHours(0,0,0,0);
             const joursRestants = countJoursOuvres(today, target);
 
             let title = 'Bonne journée !';
-            if (today >= target)       title = 'Bonne retraite, Béa !';
+            if (today >= target)         title = 'Bonne retraite, Béa !';
             else if (joursRestants <= 1) title = 'Dernier jour… profite bien !';
             else if (joursRestants <= 3) title = 'C\'est presque fini !';
             else if (joursRestants <= 5) title = 'La liberté approche !';
             else if (joursRestants <= 10) title = 'Plus que quelques jours…';
             document.getElementById('splash-title').textContent = title;
 
-            // Pétales décoratifs
             const petalsContainer = document.getElementById('splash-petals');
             const petalChars = ['🌸','🩷','✿','❀','🌷','💮','🌺'];
             for (let i = 0; i < 12; i++) {
@@ -730,7 +747,6 @@
                 petalsContainer.appendChild(p);
             }
 
-            // Fermer au clic / touche / auto après 8s
             overlay.addEventListener('click', closeSplash);
             overlay.addEventListener('touchstart', closeSplash, { passive: true });
             setTimeout(closeSplash, 8000);
@@ -774,9 +790,6 @@
         //  DATE, HORLOGE & ÉPHÉMÉRIDE
         // ════════════════════════════════════════
 
-        const JOURS_SEMAINE = ['Dimanche','Lundi','Mardi','Mercredi','Jeudi','Vendredi','Samedi'];
-        const MOIS_ANNEE = ['janvier','février','mars','avril','mai','juin','juillet','août','septembre','octobre','novembre','décembre'];
-
         function updateDateTime() {
             const now = new Date();
             document.getElementById('date-display').textContent =
@@ -802,7 +815,6 @@
             const now = new Date();
             const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
             const target = new Date(RETIREMENT_DATE); target.setHours(0,0,0,0);
-
             if (today >= target) { showCelebration(); return; }
 
             const joursOuvres = countJoursOuvres(today, target);
@@ -822,7 +834,7 @@
         }
 
         // ════════════════════════════════════════
-        //  CELEBRATION (JOUR J)
+        //  CELEBRATION
         // ════════════════════════════════════════
 
         function showCelebration() {
@@ -848,44 +860,26 @@
         function launchConfetti() {
             const canvas = document.getElementById('confetti-canvas');
             const ctx = canvas.getContext('2d');
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
+            canvas.width = window.innerWidth; canvas.height = window.innerHeight;
             const COLORS = ['#e8a0bf','#c3aed6','#a8c5a0','#d4a96a','#f5d5e0','#e0d4f0','#d4e6cf','#FFD700'];
             const pieces = [];
             for (let i = 0; i < 150; i++) {
-                pieces.push({
-                    x: Math.random() * canvas.width,
-                    y: Math.random() * canvas.height - canvas.height,
-                    r: Math.random() * 6 + 3,
-                    color: COLORS[Math.floor(Math.random() * COLORS.length)],
-                    vx: (Math.random() - 0.5) * 3,
-                    vy: Math.random() * 3 + 1.5,
-                    rot: Math.random() * 360,
-                    rotSpeed: (Math.random() - 0.5) * 8,
-                    shape: Math.random() > 0.5 ? 'circle' : 'rect',
-                    opacity: 1
-                });
+                pieces.push({ x: Math.random()*canvas.width, y: Math.random()*canvas.height - canvas.height, r: Math.random()*6+3, color: COLORS[Math.floor(Math.random()*COLORS.length)], vx: (Math.random()-0.5)*3, vy: Math.random()*3+1.5, rot: Math.random()*360, rotSpeed: (Math.random()-0.5)*8, shape: Math.random()>0.5?'circle':'rect', opacity: 1 });
             }
             let frame = 0;
             function animate() {
-                ctx.clearRect(0, 0, canvas.width, canvas.height);
-                frame++;
+                ctx.clearRect(0,0,canvas.width,canvas.height); frame++;
                 pieces.forEach(p => {
-                    p.x += p.vx + Math.sin(frame * 0.02 + p.r) * 0.5;
-                    p.y += p.vy;
-                    p.rot += p.rotSpeed;
+                    p.x += p.vx + Math.sin(frame*0.02+p.r)*0.5; p.y += p.vy; p.rot += p.rotSpeed;
                     if (frame > 200) p.opacity -= 0.005;
-                    ctx.save();
-                    ctx.translate(p.x, p.y);
-                    ctx.rotate(p.rot * Math.PI / 180);
-                    ctx.globalAlpha = Math.max(0, p.opacity);
-                    ctx.fillStyle = p.color;
-                    if (p.shape === 'circle') { ctx.beginPath(); ctx.arc(0,0,p.r,0,Math.PI*2); ctx.fill(); }
-                    else { ctx.fillRect(-p.r, -p.r/2, p.r*2, p.r); }
+                    ctx.save(); ctx.translate(p.x,p.y); ctx.rotate(p.rot*Math.PI/180);
+                    ctx.globalAlpha = Math.max(0,p.opacity); ctx.fillStyle = p.color;
+                    if (p.shape==='circle') { ctx.beginPath(); ctx.arc(0,0,p.r,0,Math.PI*2); ctx.fill(); }
+                    else { ctx.fillRect(-p.r,-p.r/2,p.r*2,p.r); }
                     ctx.restore();
                 });
                 if (frame < 400 && pieces.some(p => p.opacity > 0)) requestAnimationFrame(animate);
-                else ctx.clearRect(0, 0, canvas.width, canvas.height);
+                else ctx.clearRect(0,0,canvas.width,canvas.height);
             }
             animate();
             window.addEventListener('resize', () => { canvas.width = window.innerWidth; canvas.height = window.innerHeight; });
@@ -897,7 +891,7 @@
 
         function showDailyQuote() {
             const now = new Date();
-            const dayOfYear = Math.floor((now - new Date(now.getFullYear(), 0, 0)) / (1000 * 60 * 60 * 24));
+            const dayOfYear = Math.floor((now - new Date(now.getFullYear(), 0, 0)) / (1000*60*60*24));
             const quote = QUOTES[dayOfYear % QUOTES.length];
             document.getElementById('quote-text').textContent = quote.text;
             document.getElementById('quote-author').textContent = '— ' + quote.author;
@@ -910,10 +904,10 @@
         function createPetal() {
             const petal = document.createElement('div');
             petal.className = 'petal';
-            petal.innerHTML = ['🌸','🩷','✿','❀','🌷','💮'][Math.floor(Math.random() * 6)];
-            petal.style.left = Math.random() * 100 + 'vw';
-            petal.style.fontSize = (Math.random() * 14 + 10) + 'px';
-            petal.style.animationDuration = (Math.random() * 6 + 8) + 's';
+            petal.innerHTML = ['🌸','🩷','✿','❀','🌷','💮'][Math.floor(Math.random()*6)];
+            petal.style.left = Math.random()*100 + 'vw';
+            petal.style.fontSize = (Math.random()*14+10) + 'px';
+            petal.style.animationDuration = (Math.random()*6+8) + 's';
             document.body.appendChild(petal);
             setTimeout(() => petal.remove(), 15000);
         }
@@ -926,6 +920,8 @@
         updateCountdown();
         updateEphemeride();
         showDailyQuote();
+        buildCalendar();
+        loadWeather();
         initSplash();
 
         setInterval(updateDateTime, 1000);
@@ -933,6 +929,9 @@
         setInterval(createPetal, 4000);
         setTimeout(createPetal, 2000);
         setTimeout(createPetal, 3000);
+
+        // Rafraîchir la météo toutes les 30 minutes
+        setInterval(loadWeather, 30 * 60 * 1000);
     </script>
 </body>
 </html>
